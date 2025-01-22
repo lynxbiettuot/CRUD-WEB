@@ -39,5 +39,8 @@
     "pug": "^3.0.3",
     "sequelize": "^6.37.5",
     "stripe": "^17.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
   }
 }
