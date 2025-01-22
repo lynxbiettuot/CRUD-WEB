@@ -1,0 +1,24 @@
+extends ../layouts/main-layout.pug
+
+block content
+    main
+        .grid
+            if prods.length > 0
+                each product in prods 
+                    article.card.product-item 
+                        header.card__header 
+                            h1.product__title #{product.title} 
+                        .card__image 
+                            img(src= `/${product.imageUrl}`, alt=`${product.title}`)
+                        .card__content 
+                            h2.product__price $#{product.price}
+                            p.product__description #{product.description}
+                        .card__actions
+                            a.btn(href=`/admin/edit-product/${product._id}?edit=true`) Edit 
+                            input(type="hidden",value=`${product._id}`, name="productId")
+                            input(type="hidden",name="_csrf",value=csrfToken)
+                            button.btn(type="button", onclick="deleteProduct(this)") Delete
+            else 
+                h1 Product not found!
+    script(src="/js/admin.js")
+    

@@ -1,0 +1,63 @@
+extends ../layouts/main-layout.pug
+
+block content 
+    main
+        - var addOrEdit = (editing || hasError) ? 'edit-product' : 'add-product'
+        - var editName = (editing || hasError) ? product.title : ''
+        - var editUrl = (editing || hasError) ? product.imageUrl : ''
+        - var editPrice = (editing || hasError) ? product.price : ''
+        - var editDes = (editing || hasError) ? product.description : ''
+        - var filePath = (editing) ? product.imageUrl : ''
+        if errorMessage
+            div(class = 'user-message', class= 'user-message--error') #{errorMessage}
+        form.product-form(action='/admin/' + addOrEdit, method="POST", enctype="multipart/form-data")
+            .form-control
+                label(for="title") Title
+                input(
+                    type="text", 
+                    name="title", 
+                    value=editName,
+                    class=(validationErrors.find(e => e.path ==='title') ? 'invalid' : '')    
+                )#title
+            //- .form-control
+            //-     label(for="imageUrl") Image URL
+            //-     input(
+            //-         type="text", 
+            //-         name="imageUrl", 
+            //-         value=editUrl,
+            //-         class=(validationErrors.find(e => e.path ==='imageUrl') ? 'invalid' : '')
+            //-     )#imageUrl
+            .form-control
+                label(for="image") Image
+                input( 
+                    type="file", 
+                    name="image", 
+                    id="image",
+                    value=filePath
+                )
+            .form-control
+                label(for="price") Price
+                input(
+                    type="text", 
+                    name="price", 
+                    value=editPrice,
+                    class=(validationErrors.find(e => e.path ==='price') ? 'invalid' : '')
+                )#price
+            .form-control
+                label(for="description") Description
+                textarea(
+                    name="description", 
+                    rows="5", 
+                    class=(validationErrors.find(e => e.path ==='description') ? 'invalid' : '')
+                )#description #{editDes}
+            if(editing)
+                input(type="hidden" ,value=`${product._id}`, name="productId")
+            input(type="hidden" name="_csrf" value=csrfToken)
+            button.btn(type="submit") 
+                if(editing)
+                    return Update product
+                else
+                    return Add product
+                
+
+        

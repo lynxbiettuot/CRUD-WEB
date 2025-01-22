@@ -1,0 +1,13 @@
+extends ../layouts/main-layout.pug
+
+block content 
+    main
+        if errorMessage.length > 0
+            div(class = 'user-message', class= 'user-message--error') #{errorMessage}
+        form.login-form(action='/reset', method="POST")
+            .align-form 
+                .form-control
+                    label(for="email") E-Mail
+                    input(type="email", name="email")#email
+                input(type="hidden" name="_csrf" value=csrfToken)
+                button.btn(type="submit") Reset

@@ -1,0 +1,27 @@
+extends ../layouts/main-layout.pug
+
+block content
+    main
+        .grid
+            if products.length > 0
+                ul.cart__item-list
+                    each p in products
+                        li.cart__item 
+                            p= `${p.productId.title} - Quantities: ${p.quantity}`
+                            form(action="/cart-delete-item", method="POST")
+                                input(type="hidden",value=`${p.productId._id}`, name="productId")
+                                input(type="hidden" name="_csrf" value=csrfToken)
+                                button.btn(type="submit") Delete
+                <hr>
+                div.centered
+                    //- form(action="/create-order",method="POST")
+                    //-     input(type="hidden" name="_csrf" value=csrfToken)
+                    //-     button.btn(type="submit") Order Now! 
+                    //- /checkout là đường dẫn tuyệt đối, nghĩa là trình duyệt sẽ luôn điều hướng đến gốc của ứng dụng, sau đó thêm /checkout
+                    //- Khi href="checkout" (bỏ dấu / ở đầu), thì đường dẫn sẽ được nối thêm vào đường dẫn hiện tại.
+                    a.btn(href="/checkout") Order now!
+            else 
+                h1 Cart is empty!
+        
+
+    

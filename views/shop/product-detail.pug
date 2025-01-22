@@ -1,0 +1,13 @@
+extends ../layouts/main-layout.pug
+
+block content
+    main.centered
+        h1 #{product.title}
+        hr
+        div 
+            img(src= `/${product.imageUrl}`, alt=`${product.title}`)
+        h2 #{product.price}
+        p #{product.description}
+        //- import file send data to /cart to render in your cart when buy something
+        if isAuthenticated
+            include ../layouts/add-to-cart.pug

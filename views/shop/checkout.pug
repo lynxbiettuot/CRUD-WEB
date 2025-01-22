@@ -1,0 +1,28 @@
+extends ../layouts/main-layout.pug
+
+block content
+    main
+        .grid
+            ul.cart__item-list
+                each p in products
+                    li.cart__item 
+                        p= `${p.productId.title} - Quantities: ${p.quantity}`
+            br
+            div.centered
+                //- a.btn(href="/checkout") Order now!
+                h2 | Total: #{totalSum}
+            div.centered
+                button#order-btn Order
+                script(src="https://js.stripe.com/v3/")
+                script.
+                    var stripe = Stripe('pk_test_51QTMkQEtaTSnfTbEqEd0rultsS0XY4wb1nKcBSlXaUaXZe7ol5iYEZ3jyYOM3sr3PRSspQz4MVAiu8TXg2EyqPX400Oy0loNvs');
+                    var orderBtn = document.getElementById('order-btn');
+                    orderBtn.addEventListener('click', function() {
+                        stripe.redirectToCheckout({
+                            sessionId: '!{sessionId}' // Chèn giá trị của biến sessionId
+                        });
+                    });
+
+        
+
+    

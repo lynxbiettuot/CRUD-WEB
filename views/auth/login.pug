@@ -1,0 +1,21 @@
+extends ../layouts/main-layout.pug
+
+block content 
+    main
+        if errorMessage.length > 0
+            div(class = 'user-message', class= 'user-message--error') #{errorMessage}
+        form.login-form(action='/login', method="POST", novalidate)
+            .align-form 
+                .form-control
+                    label(for="email") E-Mail
+                    input(type="email", name="email",value=oldInput.email ,class=(validationErrors.find(e => e.path ==='email') ? 'invalid' : ''))#email
+                .form-control
+                    label(for="password") Password
+                    input(type="password", name="password",value=oldInput.password , class=(validationErrors.find(e => e.path ==='password') ? 'invalid' : ''))#password
+                input(type="hidden" name="_csrf" value=csrfToken)
+                button.btn(type="submit") Login
+                .centered
+                a(href="/reset") Reset Passwords
+            
+
+        
