@@ -18,7 +18,7 @@ const mongoose = require('mongoose');
 // const mongoConnect = require('./util/database.js').mongoConnect;
 const User = require('./models/user.js');
 
-const MONGODB_URL = `mongodb+srv://hoangvlinh09012004:09012004@cluster0.nswmi.mongodb.net/shop?retryWrites=true&w=majority&appName=Cluster0`;
+const MONGO_URL = process.env.MONGO_URL;
 
 const app = express();
 const store = new MongoDBstore({
@@ -115,8 +115,7 @@ app.use(shopRouter);
 app.use(authRouter);
 app.use('/', getError.get404page);
 
-
-mongoose.connect(MONGODB_URL)
+mongoose.connect(process.env.MONGO_URL)
     .then(result => {
         app.listen(process.env.PORT || 3000, () => {
             console.log('App is listening on port 3000');
