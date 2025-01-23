@@ -1,8 +1,6 @@
 {
   "env": {
-    "MONGO_USER": "hoangvlinh09012004",
-    "MONGO_PASSWORD": "09012004",
-    "MONGO_DEFAULT_DATABASE": "shop",
+    "MONGO_URL": "mongodb+srv://hoangvlinh09012004:09012004@cluster0.nswmi.mongodb.net/shop?retryWrites=true&w=majority&appName=Cluster0",
     "STRIPE_KEY": "sk_test_51QTMkQEtaTSnfTbEGeU9XQZu5sW4DhHySEKXjyuYeMCIuGzR4a9Wd3WnxxOSM7KI4V8WBTZbnVSBnKJ2bwqefatK00ojHUh3TR",
     "PORT": "3000"
   }

@@ -18,7 +18,7 @@ const mongoose = require('mongoose');
 // const mongoConnect = require('./util/database.js').mongoConnect;
 const User = require('./models/user.js');
 
-const MONGODB_URL = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.nswmi.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority&appName=Cluster0`;
+const MONGODB_URL = `mongodb+srv://hoangvlinh09012004:09012004@cluster0.nswmi.mongodb.net/shop?retryWrites=true&w=majority&appName=Cluster0`;
 
 const app = express();
 const store = new MongoDBstore({
