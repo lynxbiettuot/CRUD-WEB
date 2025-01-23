@@ -7,7 +7,7 @@ const multer = require('multer');
 const bodyParser = require('body-parser');
 
 const session = require('express-session');
-const MongoDBstore = require('connect-mongodb-session')(session);
+const MongoDBStore = require('connect-mongodb-session')(session);;
 const csrf = require('csurf');
 const flash = require('connect-flash');
 
@@ -18,13 +18,13 @@ const mongoose = require('mongoose');
 // const mongoConnect = require('./util/database.js').mongoConnect;
 const User = require('./models/user.js');
 
-const MONGO_URL = process.env.MONGO_URL;
+const MONGODB_URI = `${process.env.MONGO_URL}`;
 
 const app = express();
-const store = new MongoDBstore({
-    url: MONGODB_URL,
-    collection: 'sessions'
-})
+const store = new MongoDBStore({
+    uri: MONGODB_URI,
+    collection: 'sessions',
+});
 
 const csrfProtection = csrf();
 
@@ -115,7 +115,8 @@ app.use(shopRouter);
 app.use(authRouter);
 app.use('/', getError.get404page);
 
-mongoose.connect(process.env.MONGO_URL)
+
+mongoose.connect(MONGODB_URI)
     .then(result => {
         app.listen(process.env.PORT || 3000, () => {
             console.log('App is listening on port 3000');
